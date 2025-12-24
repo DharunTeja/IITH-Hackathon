@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     HOST: str = "127.0.0.1"
     PORT: int = 8000
-    CORS_ORIGINS: str = "*"
+    CORS_ORIGINS: str = "http://localhost:8080"
     ENVIRONMENT: str = "development"
 
     # Uploads
