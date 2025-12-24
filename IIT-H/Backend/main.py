@@ -9,12 +9,12 @@ from app.api import (
     patients,
     doctors,
     medications,
-    reminders,
     symptom_diary,
-    messages,
-    appointments,
-    health_records,
-    prescriptions,
+    message,
+    reminder,
+    appointment,
+    health_record,
+    prescription,
 )
 
 # Create database tables
@@ -48,19 +48,19 @@ app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(patients.router, prefix="/api/patients", tags=["Patients"])
 app.include_router(doctors.router, prefix="/api/doctors", tags=["Doctors"])
 app.include_router(medications.router, prefix="/api/medications", tags=["Medications"])
-app.include_router(reminders.router, prefix="/api/reminders", tags=["Reminders"])
+app.include_router(reminder.router, prefix="/api/reminders", tags=["Reminders"])
 app.include_router(
     symptom_diary.router, prefix="/api/symptom-diary", tags=["Symptom Diary"]
 )
-app.include_router(messages.router, prefix="/api/messages", tags=["Messages"])
+app.include_router(message.router, prefix="/api/messages", tags=["Messages"])
 app.include_router(
-    appointments.router, prefix="/api/appointments", tags=["Appointments"]
+    appointment.router, prefix="/api/appointments", tags=["Appointments"]
 )
 app.include_router(
-    health_records.router, prefix="/api/health-records", tags=["Health Records"]
+    health_record.router, prefix="/api/health-records", tags=["Health Records"]
 )
 app.include_router(
-    prescriptions.router, prefix="/api/prescriptions", tags=["Prescriptions"]
+    prescription.router, prefix="/api/prescriptions", tags=["Prescriptions"]
 )
 
 

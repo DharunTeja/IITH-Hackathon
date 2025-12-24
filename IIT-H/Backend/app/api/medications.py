@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from typing import List
 from database import get_db
 from app.models.user import User
-from app.models.medication import Medication
-from app.schemas.medication import (
+from app.models.medications import Medication
+from app.schemas.medications import (
     MedicationCreate,
     MedicationResponse,
     MedicationUpdate,

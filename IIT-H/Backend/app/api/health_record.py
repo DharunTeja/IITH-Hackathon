@@ -10,10 +10,10 @@ import os
 import shutil
 from datetime import datetime
 
-router_hr = APIRouter()
+router = APIRouter()
 
 
-@router_hr.get("/", response_model=List[HealthRecordResponse])
+@router.get("/", response_model=List[HealthRecordResponse])
 async def get_health_records(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
@@ -31,7 +31,7 @@ async def get_health_records(
     return records
 
 
-@router_hr.post(
+@router.post(
     "/", response_model=HealthRecordResponse, status_code=status.HTTP_201_CREATED
 )
 async def upload_health_record(

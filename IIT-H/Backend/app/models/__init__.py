@@ -1,5 +1,5 @@
 from .user import User, UserRole
-from .medication import Medication, StockLevel
+from .medications import Medication, StockLevel
 from .reminder import Reminder, ReminderType
 from .symptom_diary import SymptomDiary
 from .message import Message

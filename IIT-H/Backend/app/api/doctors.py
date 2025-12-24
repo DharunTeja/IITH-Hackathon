@@ -7,10 +7,10 @@ from app.utils.security import get_current_doctor
 from app.schemas.user import UserResponse
 
 
-router_doc = APIRouter()
+router = APIRouter()
 
 
-@router_doc.get("/patients", response_model=List[UserResponse])
+@router.get("/patients", response_model=List[UserResponse])
 async def get_doctor_patients(
     current_user: User = Depends(get_current_doctor), db: Session = Depends(get_db)
 ):
@@ -31,7 +31,7 @@ async def get_doctor_patients(
     return patients
 
 
-@router_doc.get("/patient/{patient_id}/records")
+@router.get("/patient/{patient_id}/records")
 async def get_patient_records(
     patient_id: int,
     current_user: User = Depends(get_current_doctor),

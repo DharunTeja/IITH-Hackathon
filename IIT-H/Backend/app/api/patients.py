@@ -4,15 +4,15 @@ from database import get_db
 from app.models.user import User
 from app.utils.security import get_current_user
 
-router_pat = APIRouter()
+router = APIRouter()
 
 
-@router_pat.get("/dashboard")
+@router.get("/dashboard")
 async def get_patient_dashboard(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
     """Get patient dashboard overview"""
-    from app.models.medication import Medication
+    from app.models.medications import Medication
     from app.models.reminder import Reminder
     from app.models.appointment import Appointment
     from datetime import datetime

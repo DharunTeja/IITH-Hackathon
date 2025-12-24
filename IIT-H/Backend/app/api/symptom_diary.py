@@ -8,10 +8,10 @@ from app.models.symptom_diary import SymptomDiary
 from app.schemas.symptom_diary import SymptomDiaryCreate, SymptomDiaryResponse
 from datetime import datetime
 
-router_symptom = APIRouter()
+router = APIRouter()
 
 
-@router_symptom.get("/", response_model=List[SymptomDiaryResponse])
+@router.get("/", response_model=List[SymptomDiaryResponse])
 async def get_symptom_history(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
@@ -25,7 +25,7 @@ async def get_symptom_history(
     return entries
 
 
-@router_symptom.post(
+@router.post(
     "/", response_model=SymptomDiaryResponse, status_code=status.HTTP_201_CREATED
 )
 async def create_symptom_entry(

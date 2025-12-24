@@ -12,10 +12,10 @@ from app.schemas.appointment import (
 )
 from app.utils.security import get_current_doctor
 
-router_appt = APIRouter()
+router = APIRouter()
 
 
-@router_appt.get("/", response_model=List[AppointmentResponse])
+@router.get("/", response_model=List[AppointmentResponse])
 async def get_appointments(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
@@ -39,7 +39,7 @@ async def get_appointments(
     return appointments
 
 
-@router_appt.post(
+@router.post(
     "/", response_model=AppointmentResponse, status_code=status.HTTP_201_CREATED
 )
 async def create_appointment(
@@ -72,7 +72,7 @@ async def create_appointment(
     return new_appointment
 
 
-@router_appt.put("/{appointment_id}", response_model=AppointmentResponse)
+@router.put("/{appointment_id}", response_model=AppointmentResponse)
 async def update_appointment_status(
     appointment_id: int,
     status_data: AppointmentUpdate,

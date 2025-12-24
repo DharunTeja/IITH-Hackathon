@@ -7,10 +7,10 @@ from app.utils.security import get_current_user
 from app.models.message import Message
 from app.schemas.message import MessageCreate, MessageResponse
 
-router_msg = APIRouter()
+router = APIRouter()
 
 
-@router_msg.get("/", response_model=List[MessageResponse])
+@router.get("/", response_model=List[MessageResponse])
 async def get_messages(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
@@ -32,9 +32,7 @@ async def get_messages(
     return messages
 
 
-@router_msg.post(
-    "/", response_model=MessageResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/", response_model=MessageResponse, status_code=status.HTTP_201_CREATED)
 async def send_message(
     message_data: MessageCreate,
     current_user: User = Depends(get_current_user),
@@ -51,7 +49,7 @@ async def send_message(
     return new_message
 
 
-@router_msg.get("/chat/{user_id}", response_model=List[MessageResponse])
+@router.get("/chat/{user_id}", response_model=List[MessageResponse])
 async def get_chat_history(
     user_id: int,
     current_user: User = Depends(get_current_user),

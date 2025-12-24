@@ -7,10 +7,10 @@ from app.utils.security import get_current_user
 from app.models.reminder import Reminder
 from app.schemas.reminder import ReminderCreate, ReminderResponse
 
-router_rem = APIRouter()
+router = APIRouter()
 
 
-@router_rem.get("/", response_model=List[ReminderResponse])
+@router.get("/", response_model=List[ReminderResponse])
 async def get_reminders(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
@@ -23,9 +23,7 @@ async def get_reminders(
     return reminders
 
 
-@router_rem.post(
-    "/", response_model=ReminderResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/", response_model=ReminderResponse, status_code=status.HTTP_201_CREATED)
 async def create_reminder(
     reminder_data: ReminderCreate,
     current_user: User = Depends(get_current_user),
