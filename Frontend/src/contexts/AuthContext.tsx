@@ -19,13 +19,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for existing session on mount
-    const token = localStorage.getItem('auth_token');
+    const token = localStorage.getItem('access_token');
     if (token) {
       authApi.me().then(({ data, error }) => {
         if (data?.user) {
           setUser(data.user);
         } else {
-          localStorage.removeItem('auth_token');
+          localStorage.removeItem('access_token');
         }
         setIsLoading(false);
       });
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     
     if (data) {
-      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('access_token', data.access_token);
       setUser(data.user);
     }
     
@@ -57,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     
     if (data) {
-      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('access_token', data.access_token);
       setUser(data.user);
     }
     

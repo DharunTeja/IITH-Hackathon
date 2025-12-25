@@ -9,7 +9,8 @@ async function request<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
-  const token = localStorage.getItem('access_token'); // ✅ FIXED
+  const token = localStorage.getItem('access_token');
+  console.log('Access Token:', token); // Debugging token retrieval
 
   const headers: HeadersInit = {
     ...(options.body instanceof FormData
@@ -49,13 +50,13 @@ async function request<T>(
 // Authentication
 export const authApi = {
   register: (name: string, email: string, password: string, role: string) =>
-    request<{ user: any; token: string }>('/auth/register', {
+    request<{ access_token: string }>('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ name, email, password, role }),
     }),
 
   login: (email: string, password: string) =>
-    request<{ user: any; token: string }>('/auth/login', {
+    request<{ access_token: string }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
@@ -65,7 +66,7 @@ export const authApi = {
 
 // Medications
 export const medicationsApi = {
-  list: () => request<any[]>('/medications'),
+  list: () => request<any[]>('/medications/'),
 
   create: (medication: {
     name: string;
@@ -75,7 +76,7 @@ export const medicationsApi = {
     remainingTablets: number;
     frequency: string;
   }) =>
-    request<any>('/medications', {
+    request<any>('/medications/', {
       method: 'POST',
       body: JSON.stringify(medication),
     }),
@@ -92,7 +93,7 @@ export const medicationsApi = {
 
 // Symptom Diary
 export const symptomDiaryApi = {
-  list: () => request<any[]>('/symptom-diary'),
+  list: () => request<any[]>('/symptom-diary/'),
 
   create: (entry: {
     date: string;
@@ -100,7 +101,7 @@ export const symptomDiaryApi = {
     severity: number;
     notes: string;
   }) =>
-    request<any>('/symptom-diary', {
+    request<any>('/symptom-diary/', {
       method: 'POST',
       body: JSON.stringify(entry),
     }),
@@ -108,7 +109,7 @@ export const symptomDiaryApi = {
 
 // Reminders
 export const remindersApi = {
-  list: () => request<any[]>('/reminders'),
+  list: () => request<any[]>('/reminders/'),
 
   create: (reminder: {
     type: string;
@@ -116,7 +117,7 @@ export const remindersApi = {
     title: string;
     isActive: boolean;
   }) =>
-    request<any>('/reminders', {
+    request<any>('/reminders/', {
       method: 'POST',
       body: JSON.stringify(reminder),
     }),
@@ -124,20 +125,20 @@ export const remindersApi = {
 
 // Messages
 export const messagesApi = {
-  list: () => request<any[]>('/messages'),
+  list: () => request<any[]>('/messages/'),
 
   send: (receiverId: string, message: string) =>
-    request<any>('/messages', {
+    request<any>('/messages/', {
       method: 'POST',
       body: JSON.stringify({ receiverId, message }),
     }),
 
-  chatHistory: (userId: string) => request<any[]>(`/messages/chat/${userId}`),
+  chatHistory: (userId: string) => request<any[]>(`/message/chat/${userId}`),
 };
 
 // Appointments
 export const appointmentsApi = {
-  list: () => request<any[]>('/appointments'),
+  list: () => request<any[]>('/appointments/'),
 
   create: (appointment: {
     doctorId: string;
@@ -145,7 +146,7 @@ export const appointmentsApi = {
     time: string;
     reason: string;
   }) =>
-    request<any>('/appointments', {
+    request<any>('/appointments/', {
       method: 'POST',
       body: JSON.stringify(appointment),
     }),
@@ -159,10 +160,10 @@ export const appointmentsApi = {
 
 // Health Records
 export const healthRecordsApi = {
-  list: () => request<any[]>('/health-records'),
+  list: () => request<any[]>('/health-records/'),
 
   upload: (formData: FormData) =>
-    request<any>('/health-records', {
+    request<any>('/health-record/', {
       method: 'POST',
       headers: {}, // Let browser set Content-Type for FormData
       body: formData as any,
@@ -171,7 +172,7 @@ export const healthRecordsApi = {
 
 // Prescriptions
 export const prescriptionsApi = {
-  list: () => request<any[]>('/prescriptions'),
+  list: () => request<any[]>('/prescriptions/'),
 
   create: (prescription: {
     patientId: string;
@@ -179,7 +180,7 @@ export const prescriptionsApi = {
     dosage: string;
     timing: string;
   }) =>
-    request<any>('/prescriptions', {
+    request<any>('/prescriptions/', {
       method: 'POST',
       body: JSON.stringify(prescription),
     }),
@@ -187,7 +188,7 @@ export const prescriptionsApi = {
 
 // Doctor Features
 export const doctorsApi = {
-  listPatients: () => request<any[]>('/doctors/patients'),
+  listPatients: () => request<any[]>('/doctors/patients/'),
 
   getPatientRecords: (patientId: string) =>
     request<any[]>(`/doctors/patient/${patientId}/records`),
