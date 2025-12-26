@@ -55,10 +55,10 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 bash
-# Copy example env file
+#copy example env file
 cp .env.example .env
 
-# Edit .env with your configuratioon
+#edit .env with your configuration
 nano .env
 
 ### Run the API Server
@@ -111,3 +111,4 @@ Doctor Features
 - GET ```/api/doctors/patients``` - List patients
 
 - GET ```/api/doctors/patient/{id}/records``` - Patient history
+
