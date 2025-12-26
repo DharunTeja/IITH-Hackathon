@@ -53,13 +53,13 @@ venv\Scripts\activate
 
 #Install Dependancies
 pip install -r requirements.txt
-```
-bash
+
 #copy example env file
 cp .env.example .env
 
 #edit .env with your configuration
 nano .env
+```
 
 ### Run the API Server
 ```bash
@@ -111,4 +111,5 @@ Doctor Features
 - GET ```/api/doctors/patients``` - List patients
 
 - GET ```/api/doctors/patient/{id}/records``` - Patient history
+
 
